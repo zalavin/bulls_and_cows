@@ -23,19 +23,14 @@ fn main() {
     
         io::stdin().read_line(&mut guess)
              .expect("Failed to read line");
-            
-        let vec_str: String = vec.as_slice().into_iter().map(|i| i.to_string()).collect::<String>();
         
         // Return if number matches
+        let vec_str: String = vec.as_slice().into_iter().map(|i| i.to_string()).collect::<String>();
+        
         if vec_str == guess.trim() {
             println!("You have won with {} attempts!", attempts);
             break;
         }
-    
-        // Find bulls and cows
-        let mut bulls = 0;
-        let mut cows = 0;
-        let mut index = 0;
         
         // Split number into chars
         let guess: Vec<u32> = guess
@@ -44,7 +39,12 @@ fn main() {
             .filter(|s| !s.is_empty())
             .map(|s| s.parse().unwrap())
             .collect();
-        
+    
+        // Find bulls and cows
+        let mut bulls = 0;
+        let mut cows = 0;
+        let mut index = 0;
+
         for x in &guess {
             if vec[index] == guess[index] {
                 bulls += 1;
